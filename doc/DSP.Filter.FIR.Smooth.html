@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >DSP.Filter.FIR.Smooth</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/DSP/Filter/FIR/Smooth.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "DSP.Filter.FIR.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>DSP.Filter.FIR.Smooth</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > Herrmann type smooth FIR filters, from Hamming, Chapter 7, also
+ known as maximally flat FIR filters</P
+	  ><P
+	  > If x is the -3 dB point, then p/q = -(x+1)/(x-1)
+</P
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#smoothfir"
+		>smoothfir</A
+		> :: (Ix a, Integral a, Fractional b) =&gt; a -&gt; a -&gt; Array a b</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Documentation</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "smoothfir"
+	  ></A
+	  ><B
+	  >smoothfir</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Ix a, Integral a, Fractional b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > p</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > q</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; Array a b</TD
+	      ><TD CLASS = "rdoc"
+	      > h[n]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > designs smooth FIR filters</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

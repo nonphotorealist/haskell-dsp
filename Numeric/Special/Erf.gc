@@ -1,0 +1,129 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Erf
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Erf functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Erf (erfc,     erfc_e,
+			    log_erfc, log_erfc_e,
+			    erf,      erf_e,
+			    erf_Z,    erf_Z_e,
+			    erf_Q,    erf_Q_e,
+			   ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_erf.h>
+
+-------------------------------------------------------------------------------
+
+%fun erfc :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_erfc(x);
+%result (double y)
+
+%fun erfc_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_erfc_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun log_erfc :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_log_erfc(x);
+%result (double y)
+
+%fun log_erfc_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_log_erfc_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun erf :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_erf(x);
+%result (double y)
+
+%fun erf_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_erf_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun erf_Z :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_erf_Z(x);
+%result (double y)
+
+%fun erf_Z_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_erf_Z_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun erf_Q :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_erf_Q(x);
+%result (double y)
+
+%fun erf_Q_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_erf_Q_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)

@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >DSP.Estimation.Frequency.WLP</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/DSP/Estimation/Frequency/WLP.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "DSP.Estimation.Frequency.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>DSP.Estimation.Frequency.WLP</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> This module contains a few algorithms for weighted linear predictors
+ for estimating the frequency of a complex sinusoid in noise.
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#wlp"
+		>wlp</A
+		> :: (Ix a, Integral a, RealFloat b) =&gt; Array a b -&gt; Array a (Complex b) -&gt; b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#lrp"
+		>lrp</A
+		> :: (Ix a, Integral a, RealFloat b) =&gt; Array a (Complex b) -&gt; b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#kay"
+		>kay</A
+		> :: (Ix a, Integral a, RealFloat b) =&gt; Array a (Complex b) -&gt; b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#lw"
+		>lw</A
+		> :: (Ix a, Integral a, RealFloat b) =&gt; Array a (Complex b) -&gt; b</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#ckq"
+		>ckq</A
+		> :: (Ix a, Integral a, RealFloat b) =&gt; Array a (Complex b) -&gt; b -&gt; b -&gt; b</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Documentation</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "wlp"
+	  ></A
+	  ><B
+	  >wlp</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Ix a, Integral a, RealFloat b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; Array a b</TD
+	      ><TD CLASS = "rdoc"
+	      > window</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; Array a (Complex b)</TD
+	      ><TD CLASS = "rdoc"
+	      > z</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > The weighted linear predictor form of the frequency estimator</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "lrp"
+	  ></A
+	  ><B
+	  >lrp</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Ix a, Integral a, RealFloat b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; Array a (Complex b)</TD
+	      ><TD CLASS = "rdoc"
+	      > z</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > WLP using Lank, Reed, and Pollon's window</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "kay"
+	  ></A
+	  ><B
+	  >kay</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Ix a, Integral a, RealFloat b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; Array a (Complex b)</TD
+	      ><TD CLASS = "rdoc"
+	      > z</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > WLP using kay's window</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "lw"
+	  ></A
+	  ><B
+	  >lw</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Ix a, Integral a, RealFloat b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; Array a (Complex b)</TD
+	      ><TD CLASS = "rdoc"
+	      > z</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > WLP using Lovell and Williamson's window</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "ckq"
+	  ></A
+	  ><B
+	  >ckq</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Ix a, Integral a, RealFloat b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; Array a (Complex b)</TD
+	      ><TD CLASS = "rdoc"
+	      > z</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > rho</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > sigma</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > WLP using Clarkson, Kootsookos, and Quinn's window</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

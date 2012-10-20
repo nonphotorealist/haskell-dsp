@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >DSP.Filter.IIR.Prony</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/DSP/Filter/IIR/Prony.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "DSP.Filter.IIR.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>DSP.Filter.IIR.Prony</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > General case of Prony's Method where K &gt; p+q</P
+	  ><P
+	  > References: L&amp;I, Sect 8.1; P&amp;B, Sect 7.5; P&amp;M, Sect 8.5.2</P
+	  ><P
+	  > Notation follows L&amp;I
+</P
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#prony"
+		>prony</A
+		> :: Int -&gt; Int -&gt; Array Int Double -&gt; (Array Int Double, Array Int Double)</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Documentation</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "prony"
+	  ></A
+	  ><B
+	  >prony</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: Int</TD
+	      ><TD CLASS = "rdoc"
+	      > p</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; Int</TD
+	      ><TD CLASS = "rdoc"
+	      > q</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; Array Int Double</TD
+	      ><TD CLASS = "rdoc"
+	      > g[n]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; (Array Int Double, Array Int Double)</TD
+	      ><TD CLASS = "rdoc"
+	      > (b,a)</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > Implementation of Prony's method</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

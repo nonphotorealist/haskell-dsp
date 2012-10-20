@@ -1,0 +1,93 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Elljac
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Elljac functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Elljac (elljac_e,
+			       elljac_sn_e, elljac_cn_e, elljac_dn_e,
+			       elljac_cd_e, elljac_dc_e, elljac_ns_e,
+			       elljac_sd_e, elljac_nc_e, elljac_ds_e,
+			       elljac_nd_e, elljac_sc_e, elljac_cs_e
+			      ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_elljac.h>
+
+-------------------------------------------------------------------------------
+
+%fun elljac_e :: Double -> Double -> (Double, Double, Double)
+%call (double u) (double m)
+%code int status;
+%     double sn;
+%     double cn;
+%     double dn;
+%     status = gsl_sf_elljac_e(u, m, &sn, &cn, &dn);
+%fail {status != 0} {gsl_strerror(status)}
+%result (double sn, double cn, double dn)
+
+-------------------------------------------------------------------------------
+
+-- Abramowitz & Stegun, Sec 16.3
+
+elljac_sn_e :: Double -> Double -> Double
+elljac_sn_e u m = sn
+    where (sn,_,_) = elljac_e u m
+
+elljac_cn_e :: Double -> Double -> Double
+elljac_cn_e u m = cn
+    where (_,cn,_) = elljac_e u m
+
+elljac_dn_e :: Double -> Double -> Double
+elljac_dn_e u m = dn
+    where (_,_,dn) = elljac_e u m
+
+elljac_cd_e :: Double -> Double -> Double
+elljac_cd_e u m = cn / dn
+    where (_,cn,dn) = elljac_e u m
+
+elljac_sd_e :: Double -> Double -> Double
+elljac_sd_e u m = sn / dn
+    where (sn,_,dn) = elljac_e u m
+
+elljac_nd_e :: Double -> Double -> Double
+elljac_nd_e u m = 1 / dn
+    where (_,_,dn) = elljac_e u m
+
+elljac_dc_e :: Double -> Double -> Double
+elljac_dc_e u m = dn / cn
+    where (_,cn,dn) = elljac_e u m
+
+elljac_nc_e :: Double -> Double -> Double
+elljac_nc_e u m = 1 / cn
+    where (_,cn,_) = elljac_e u m
+
+elljac_sc_e :: Double -> Double -> Double
+elljac_sc_e u m = sn / cn
+    where (sn,cn,_) = elljac_e u m
+
+elljac_ns_e :: Double -> Double -> Double
+elljac_ns_e u m = 1 / sn
+    where (sn,_,_) = elljac_e u m
+
+elljac_ds_e :: Double -> Double -> Double
+elljac_ds_e u m = dn / sn
+    where (sn,_,dn) = elljac_e u m
+
+elljac_cs_e :: Double -> Double -> Double
+elljac_cs_e u m = cn / sn
+    where (sn,cn,_) = elljac_e u m

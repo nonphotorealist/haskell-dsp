@@ -1,0 +1,874 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Bessel
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Bessel functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Bessel (bessel_J0, bessel_J0_e,
+			       bessel_J1, bessel_J1_e,
+			       bessel_Jn, bessel_Jn_e,
+
+			       bessel_Y0, bessel_Y0_e,
+			       bessel_Y1, bessel_Y1_e,
+			       bessel_Yn, bessel_Yn_e,
+
+			       bessel_I0, bessel_I0_e,
+			       bessel_I1, bessel_I1_e,
+			       bessel_In, bessel_In_e,
+
+			       bessel_I0_scaled, bessel_I0_scaled_e,
+			       bessel_I1_scaled, bessel_I1_scaled_e,
+			       bessel_In_scaled, bessel_In_scaled_e,
+
+			       bessel_K0, bessel_K0_e,
+			       bessel_K1, bessel_K1_e,
+			       bessel_Kn, bessel_Kn_e,
+
+			       bessel_K0_scaled, bessel_K0_scaled_e,
+			       bessel_K1_scaled, bessel_K1_scaled_e,
+			       bessel_Kn_scaled, bessel_Kn_scaled_e,
+
+			       bessel_j0, bessel_j0_e,
+			       bessel_j1, bessel_j1_e,
+			       bessel_jl, bessel_jl_e,
+
+			       bessel_y0, bessel_y0_e,
+			       bessel_y1, bessel_y1_e,
+			       bessel_yl, bessel_yl_e,
+
+			       bessel_i0_scaled, bessel_i0_scaled_e,
+			       bessel_i1_scaled, bessel_i1_scaled_e,
+			       bessel_il_scaled, bessel_il_scaled_e,
+
+			       bessel_k0_scaled, bessel_k0_scaled_e,
+			       bessel_k1_scaled, bessel_k1_scaled_e,
+			       bessel_kl_scaled, bessel_kl_scaled_e,
+
+			       bessel_Jnu, bessel_Jnu_e,
+			       bessel_Ynu, bessel_Ynu_e,
+			       bessel_Inu, bessel_Inu_e,
+			       bessel_Inu_scaled, bessel_Inu_scaled_e,
+			       bessel_Knu, bessel_Knu_e,
+			       bessel_Knu_scaled, bessel_Knu_scaled_e,
+			       bessel_lnKnu, bessel_lnKnu_e,
+
+                               bessel_zero_J0,  bessel_zero_J0_e,
+                               bessel_zero_J1,  bessel_zero_J1_e,
+                               bessel_zero_Jnu, bessel_zero_Jnu_e
+			      ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_bessel.h>
+
+-------------------------------------------------------------------------------
+
+%fun bessel_J0 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_J0(x);
+%result (double y)
+
+%fun bessel_J0_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_J0_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_J1 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_J1(x);
+%result (double y)
+
+%fun bessel_J1_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_J1_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Jn :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Jn(n, x);
+%result (double y)
+
+%fun bessel_Jn_e :: Int -> Double -> (Double, Double)
+%call (int n) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Jn_e(n, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Y0 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_Y0(x);
+%result (double y)
+
+%fun bessel_Y0_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Y0_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Y1 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_Y1(x);
+%result (double y)
+
+%fun bessel_Y1_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Y1_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Yn :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Yn(n, x);
+%result (double y)
+
+%fun bessel_Yn_e :: Int -> Double -> (Double, Double)
+%call (int n) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Yn_e(n, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_I0 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_I0(x);
+%result (double y)
+
+%fun bessel_I0_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_I0_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_I1 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_I1(x);
+%result (double y)
+
+%fun bessel_I1_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_I1_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_In :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_In(n, x);
+%result (double y)
+
+%fun bessel_In_e :: Int -> Double -> (Double, Double)
+%call (int n) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_In_e(n, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_I0_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_I0_scaled(x);
+%result (double y)
+
+%fun bessel_I0_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_I0_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_I1_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_I1_scaled(x);
+%result (double y)
+
+%fun bessel_I1_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_I1_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_In_scaled :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_In_scaled(n, x);
+%result (double y)
+
+%fun bessel_In_scaled_e :: Int -> Double -> (Double, Double)
+%call (int n) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_In_scaled_e(n, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_K0 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_K0(x);
+%result (double y)
+
+%fun bessel_K0_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_K0_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_K1 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_K1(x);
+%result (double y)
+
+%fun bessel_K1_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_K1_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Kn :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Kn(n, x);
+%result (double y)
+
+%fun bessel_Kn_e :: Int -> Double -> (Double, Double)
+%call (int n) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Kn_e(n, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+-------------------------------------------------------------------------------
+
+%fun bessel_K0_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_K0_scaled(x);
+%result (double y)
+
+%fun bessel_K0_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_K0_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_K1_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_K1_scaled(x);
+%result (double y)
+
+%fun bessel_K1_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_K1_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Kn_scaled :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Kn_scaled(n, x);
+%result (double y)
+
+%fun bessel_Kn_scaled_e :: Int -> Double -> (Double, Double)
+%call (int n) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Kn_scaled_e(n, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_j0 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_j0(x);
+%result (double y)
+
+%fun bessel_j0_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_j0_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_j1 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_j1(x);
+%result (double y)
+
+%fun bessel_j1_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_j1_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_jl :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_jl(n, x);
+%result (double y)
+
+%fun bessel_jl_e :: Int -> Double -> (Double, Double)
+%call (int l) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_jl_e(l, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_y0 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_y0(x);
+%result (double y)
+
+%fun bessel_y0_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_y0_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_y1 :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_y1(x);
+%result (double y)
+
+%fun bessel_y1_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_y1_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_yl :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_yl(n, x);
+%result (double y)
+
+%fun bessel_yl_e :: Int -> Double -> (Double, Double)
+%call (int l) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_yl_e(l, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_i0_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_i0_scaled(x);
+%result (double y)
+
+%fun bessel_i0_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_i0_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_i1_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_i1_scaled(x);
+%result (double y)
+
+%fun bessel_i1_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_i1_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_il_scaled :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_il_scaled(n, x);
+%result (double y)
+
+%fun bessel_il_scaled_e :: Int -> Double -> (Double, Double)
+%call (int l) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_il_scaled_e(l, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_k0_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_k0_scaled(x);
+%result (double y)
+
+%fun bessel_k0_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_k0_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_k1_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_bessel_k1_scaled(x);
+%result (double y)
+
+%fun bessel_k1_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_k1_scaled_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_kl_scaled :: Int -> Double -> Double
+%call (int n) (double x)
+%code double y;
+%     y = gsl_sf_bessel_kl_scaled(n, x);
+%result (double y)
+
+%fun bessel_kl_scaled_e :: Int -> Double -> (Double, Double)
+%call (int l) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_kl_scaled_e(l, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Jnu :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Jnu(nu, x);
+%result (double y)
+
+%fun bessel_Jnu_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Jnu_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Ynu :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Ynu(nu, x);
+%result (double y)
+
+%fun bessel_Ynu_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Ynu_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Inu :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Inu(nu, x);
+%result (double y)
+
+%fun bessel_Inu_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Inu_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Inu_scaled :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Inu_scaled(nu, x);
+%result (double y)
+
+%fun bessel_Inu_scaled_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Inu_scaled_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Knu :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Knu(nu, x);
+%result (double y)
+
+%fun bessel_Knu_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Knu_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_Knu_scaled :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_Knu_scaled(nu, x);
+%result (double y)
+
+%fun bessel_Knu_scaled_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_Knu_scaled_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_lnKnu :: Double -> Double -> Double
+%call (double nu) (double x)
+%code double y;
+%     y = gsl_sf_bessel_lnKnu(nu, x);
+%result (double y)
+
+%fun bessel_lnKnu_e :: Double -> Double -> (Double, Double)
+%call (double nu) (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_lnKnu_e(nu, x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_zero_J0 :: Int -> Double
+%call (int s)
+%code double y;
+%     y = gsl_sf_bessel_zero_J0(s);
+%result (double y)
+
+%fun bessel_zero_J0_e :: Int -> (Double, Double)
+%call (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_zero_J0_e(s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_zero_J1 :: Int -> Double
+%call (int s)
+%code double y;
+%     y = gsl_sf_bessel_zero_J1(s);
+%result (double y)
+
+%fun bessel_zero_J1_e :: Int -> (Double, Double)
+%call (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_zero_J1_e(s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun bessel_zero_Jnu :: Double -> Int -> Double
+%call (double nu) (int s)
+%code double y;
+%     y = gsl_sf_bessel_zero_Jnu(nu, s);
+%result (double y)
+
+%fun bessel_zero_Jnu_e :: Double -> Int -> (Double, Double)
+%call (double nu) (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_bessel_zero_Jnu_e(nu, s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)

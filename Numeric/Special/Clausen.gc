@@ -1,0 +1,45 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Clausen
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Clausen functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Clausen (clausen, clausen_e,
+	    ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_clausen.h>
+
+-------------------------------------------------------------------------------
+
+%fun clausen :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_clausen(x);
+%result (double y)
+
+%fun clausen_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_clausen_e(x, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)

@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >Numeric.Random.Spectrum.Pink</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/Numeric/Random/Spectrum/Pink.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "Numeric.Random.Spectrum.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>Numeric.Random.Spectrum.Pink</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > Functions for pinking noise</P
+	  ><P
+	  > <A HREF = "http://www.firstpr.com.au/dsp/pink-noise/"
+	    >http://www.firstpr.com.au/dsp/pink-noise/</A
+	    >
+</P
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#kellet"
+		>kellet</A
+		> :: [Double] -&gt; [Double]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#voss"
+		>voss</A
+		> :: Int -&gt; [Double] -&gt; [Double]</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Documentation</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "kellet"
+	  ></A
+	  ><B
+	  >kellet</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: [Double]</TD
+	      ><TD CLASS = "rdoc"
+	      > noise </TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Double]</TD
+	      ><TD CLASS = "rdoc"
+	      > pinked noise</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > Kellet's filter</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "voss"
+	  ></A
+	  ><B
+	  >voss</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: Int</TD
+	      ><TD CLASS = "rdoc"
+	      > number of octaves to sum</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Double]</TD
+	      ><TD CLASS = "rdoc"
+	      > noise</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Double]</TD
+	      ><TD CLASS = "rdoc"
+	      > pinked noise</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      ><P
+		> Voss's algorithm</P
+		><P
+		> UNTESTED, but the algorithm looks like it is working based on my hand
+ tests.</P
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

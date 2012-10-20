@@ -1,0 +1,45 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Foo
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Foo functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Foo (foo_Bar, foo_Bar_e,
+			   ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_foo.h>
+
+-------------------------------------------------------------------------------
+
+%fun foo_Bar :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_foo_Bar(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun foo_Bar_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_foo_Bar_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)

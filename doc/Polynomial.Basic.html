@@ -1,0 +1,478 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >Polynomial.Basic</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/Polynomial/Basic.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "Polynomial.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>Polynomial.Basic</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	><TR
+	  ><TD CLASS = "section4"
+	    ><B
+	      >Contents</B
+	      ></TD
+	    ></TR
+	  ><TR
+	  ><TD
+	    ><DL
+	      ><DT
+		><A HREF = "#1"
+		  > Types</A
+		  ></DT
+		><DT
+		><A HREF = "#2"
+		  > Functions</A
+		  ></DT
+		></DL
+	      ></TD
+	    ></TR
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Simple module for handling polynomials.
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polyeval"
+		>polyeval</A
+		> :: (Num a) =&gt; [a] -&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polyadd"
+		>polyadd</A
+		> :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polysub"
+		>polysub</A
+		> :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polyscale"
+		>polyscale</A
+		> :: (Num a) =&gt; a -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polymult"
+		>polymult</A
+		> :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polydiv"
+		>polydiv</A
+		> :: (Fractional a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polymod"
+		>polymod</A
+		> :: (Fractional a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polypow"
+		>polypow</A
+		> :: (Num a, Integral b) =&gt; [a] -&gt; b -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polysubst"
+		>polysubst</A
+		> :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polyderiv"
+		>polyderiv</A
+		> :: (Num a) =&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#polyinteg"
+		>polyinteg</A
+		> :: (Fractional a) =&gt; [a] -&gt; a -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#roots2poly"
+		>roots2poly</A
+		> :: (Num a) =&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  > Types</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "2"
+	  > Functions</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polyeval"
+	  ></A
+	  ><B
+	  >polyeval</B
+	  > :: (Num a) =&gt; [a] -&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Evaluate a polynomial using Horner's method.</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polyadd"
+	  ></A
+	  ><B
+	  >polyadd</B
+	  > :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Add two polynomials</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polysub"
+	  ></A
+	  ><B
+	  >polysub</B
+	  > :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Subtract two polynomials</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polyscale"
+	  ></A
+	  ><B
+	  >polyscale</B
+	  > :: (Num a) =&gt; a -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Scale a polynomial</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polymult"
+	  ></A
+	  ><B
+	  >polymult</B
+	  > :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Multiply two polynomials</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polydiv"
+	  ></A
+	  ><B
+	  >polydiv</B
+	  > :: (Fractional a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Divide two polynomials</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polymod"
+	  ></A
+	  ><B
+	  >polymod</B
+	  > :: (Fractional a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Modulus of two polynomials (remainder of division)</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polypow"
+	  ></A
+	  ><B
+	  >polypow</B
+	  > :: (Num a, Integral b) =&gt; [a] -&gt; b -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Raise a polynomial to a non-negative integer power</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polysubst"
+	  ></A
+	  ><B
+	  >polysubst</B
+	  > :: (Num a) =&gt; [a] -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Polynomial substitution y(n) = x(w(n))</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polyderiv"
+	  ></A
+	  ><B
+	  >polyderiv</B
+	  > :: (Num a) =&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Polynomial derivative</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "polyinteg"
+	  ></A
+	  ><B
+	  >polyinteg</B
+	  > :: (Fractional a) =&gt; [a] -&gt; a -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Polynomial integration</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "roots2poly"
+	  ></A
+	  ><B
+	  >roots2poly</B
+	  > :: (Num a) =&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Convert roots to a polynomial</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

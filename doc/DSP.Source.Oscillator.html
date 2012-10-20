@@ -1,0 +1,463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >DSP.Source.Oscillator</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/DSP/Source/Oscillator.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "DSP.Source.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>DSP.Source.Oscillator</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> NCO and NCOM functions
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#nco"
+		>nco</A
+		> :: (RealFloat a) =&gt; a -&gt; a -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#ncom"
+		>ncom</A
+		> :: (RealFloat a) =&gt; a -&gt; a -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#quadrature_nco"
+		>quadrature_nco</A
+		> :: (RealFloat a) =&gt; a -&gt; a -&gt; [Complex a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#complex_ncom"
+		>complex_ncom</A
+		> :: (RealFloat a) =&gt; a -&gt; a -&gt; [Complex a] -&gt; [Complex a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#quadrature_ncom"
+		>quadrature_ncom</A
+		> :: (RealFloat a) =&gt; a -&gt; a -&gt; [Complex a] -&gt; [a]</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Documentation</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "nco"
+	  ></A
+	  ><B
+	  >nco</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (RealFloat a)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > phi</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [a]</TD
+	      ><TD CLASS = "rdoc"
+	      > y</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > <TT
+		><A HREF = "DSP.Source.Oscillator.html#nco"
+		  >nco</A
+		  ></TT
+		> creates a sine wave with normalized frequency wn (numerically
+ controlled oscillator, or NCO) using the recurrence relation y[n] =
+ 2cos(wn)*y[n-1] - y[n-2].  Eventually, cumlative errors will creep
+ into the data.  This is unavoidable since performing AGC on this type
+ of real data is hard.  The good news is that the error is small with
+ floating point data.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "ncom"
+	  ></A
+	  ><B
+	  >ncom</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (RealFloat a)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > phi</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [a]</TD
+	      ><TD CLASS = "rdoc"
+	      > x</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [a]</TD
+	      ><TD CLASS = "rdoc"
+	      > y</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > <TT
+		><A HREF = "DSP.Source.Oscillator.html#ncom"
+		  >ncom</A
+		  ></TT
+		> mixes (multiplies) x by a real sine wave with normalized
+ frequency wn.  This is usually called an NCOM: Numerically Controlled
+ Oscillator and Modulator.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "quadrature_nco"
+	  ></A
+	  ><B
+	  >quadrature_nco</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (RealFloat a)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > phi</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Complex a]</TD
+	      ><TD CLASS = "rdoc"
+	      > y</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > <TT
+		><A HREF = "DSP.Source.Oscillator.html#quadrature_nco"
+		  >quadrature_nco</A
+		  ></TT
+		> returns an infinite list representing a complex phasor
+ with a phase step of wn radians, ie a quadrature nco with normalized
+ frequency wn radians/sample.  Since Haskell uses lazy evaluation,
+ rotate will only be computed once, so this NCO uses only one sin and
+ one cos for the entire list, at the expense of 4 mults, 1 add, and 1
+ subtract per point.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "complex_ncom"
+	  ></A
+	  ><B
+	  >complex_ncom</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (RealFloat a)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > phi</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Complex a]</TD
+	      ><TD CLASS = "rdoc"
+	      > x</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Complex a]</TD
+	      ><TD CLASS = "rdoc"
+	      > y</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > <TT
+		><A HREF = "DSP.Source.Oscillator.html#complex_ncom"
+		  >complex_ncom</A
+		  ></TT
+		> mixes the complex input x with a quardatue nco with
+ normalized frequency wn radians/sample using complex multiplies
+ (perform a complex spectral shift)</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "quadrature_ncom"
+	  ></A
+	  ><B
+	  >quadrature_ncom</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (RealFloat a)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > w</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > phi</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [Complex a]</TD
+	      ><TD CLASS = "rdoc"
+	      > x</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; [a]</TD
+	      ><TD CLASS = "rdoc"
+	      > y</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > <TT
+		><A HREF = "DSP.Source.Oscillator.html#quadrature_ncom"
+		  >quadrature_ncom</A
+		  ></TT
+		> mixes the complex input x with a quadrature nco with
+ normalized frequency wn radians/sample in quadrature (I/Q modulation)</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

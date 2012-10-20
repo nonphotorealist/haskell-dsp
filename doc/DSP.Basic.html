@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >DSP.Basic</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/DSP/Basic.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "DSP.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>DSP.Basic</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	> Basic functions for manipulating signals
+</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#z"
+		>z</A
+		> :: (Num a) =&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#zn"
+		>zn</A
+		> :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#downsample"
+		>downsample</A
+		> :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#upsample"
+		>upsample</A
+		> :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#upsampleAndHold"
+		>upsampleAndHold</A
+		> :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#pad"
+		>pad</A
+		> :: (Ix a, Integral a, Num b) =&gt; Array a b -&gt; a -&gt; Array a b</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	><A NAME = "1"
+	  > Functions</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "z"
+	  ></A
+	  ><B
+	  >z</B
+	  > :: (Num a) =&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > <TT
+	    >z</TT
+	    > is the unit delay function, eg,</P
+	  ><PRE
+	  >z [ 1, 2, 3 ] == [ 0, 1, 2, 3 ]</PRE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "zn"
+	  ></A
+	  ><B
+	  >zn</B
+	  > :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > zn is the n sample delay function, eg,</P
+	  ><PRE
+	  >zn 3 [ 1, 2, 3 ] == [ 0, 0, 0, 1, 2, 3 ]</PRE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "downsample"
+	  ></A
+	  ><B
+	  >downsample</B
+	  > :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > <TT
+	    >downsample</TT
+	    > throws away every n'th sample, eg,</P
+	  ><PRE
+	  >downsample 2 [ 1, 2, 3, 4, 5, 6 ] == [ 1, 3, 5 ]</PRE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "upsample"
+	  ></A
+	  ><B
+	  >upsample</B
+	  > :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > <TT
+	    >upsample</TT
+	    > inserts n-1 zeros between each sample, eg,</P
+	  ><PRE
+	  >upsample 2 [ 1, 2, 3 ] == [ 1, 0, 2, 0, 3, 0 ]</PRE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "upsampleAndHold"
+	  ></A
+	  ><B
+	  >upsampleAndHold</B
+	  > :: (Num a) =&gt; Int -&gt; [a] -&gt; [a]</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > <TT
+	    >upsampleAndHold</TT
+	    > replicates each sample n times, eg,</P
+	  ><PRE
+	  >upsampleAndHold 3 [ 1, 2, 3 ] == [ 1, 1, 1, 2, 2, 2, 3, 3, 3 ]</PRE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "pad"
+	  ></A
+	  ><B
+	  >pad</B
+	  > :: (Ix a, Integral a, Num b) =&gt; Array a b -&gt; a -&gt; Array a b</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > pad a sequence with zeros to length n</P
+	  ><PRE
+	  >pad [ 1, 2, 3 ] 6 == [ 1, 2, 3, 0, 0, 0 ]</PRE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

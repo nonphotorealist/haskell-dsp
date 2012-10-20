@@ -1,0 +1,276 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Airy
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Airy functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Airy (airy_Ai,              airy_Ai_e,
+			     airy_Ai_scaled,       airy_Ai_scaled_e,
+			     airy_Ai_deriv,        airy_Ai_deriv_e,
+			     airy_Ai_deriv_scaled, airy_Ai_deriv_scaled_e,
+		             airy_zero_Ai,         airy_zero_Ai_e,
+			     airy_zero_Ai_deriv,   airy_zero_Ai_deriv_e,
+		             airy_Bi,              airy_Bi_e,
+			     airy_Bi_scaled,       airy_Bi_scaled_e,
+			     airy_Bi_deriv,        airy_Bi_deriv_e,
+			     airy_Bi_deriv_scaled, airy_Bi_deriv_scaled_e,
+			     airy_zero_Bi,         airy_zero_Bi_e,
+			     airy_zero_Bi_deriv,   airy_zero_Bi_deriv_e
+	    ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_airy.h>
+
+-------------------------------------------------------------------------------
+
+%fun airy_Ai :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Ai(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Ai_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Ai_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Ai_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Ai_scaled(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Ai_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Ai_scaled_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Ai_deriv :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Ai_deriv(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Ai_deriv_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Ai_deriv_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Ai_deriv_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Ai_deriv_scaled(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Ai_deriv_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Ai_deriv_scaled_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_zero_Ai :: Int -> Double
+%call (int s)
+%code double z;
+%     z = gsl_sf_airy_zero_Ai(s);
+%result (double z)
+
+%fun airy_zero_Ai_e :: Int -> (Double, Double)
+%call (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_zero_Ai_e(s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_zero_Ai_deriv :: Int -> Double
+%call (int s)
+%code double z;
+%     z = gsl_sf_airy_zero_Ai_deriv(s);
+%result (double z)
+
+%fun airy_zero_Ai_deriv_e :: Int -> (Double, Double)
+%call (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_zero_Ai_deriv_e(s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Bi :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Bi(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Bi_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Bi_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Bi_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Bi_scaled(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Bi_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Bi_scaled_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Bi_deriv :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Bi_deriv(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Bi_deriv_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Bi_deriv_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_Bi_deriv_scaled :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_airy_Bi_deriv_scaled(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun airy_Bi_deriv_scaled_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_Bi_deriv_scaled_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_zero_Bi :: Int -> Double
+%call (int s)
+%code double z;
+%     z = gsl_sf_airy_zero_Bi(s);
+%result (double z)
+
+%fun airy_zero_Bi_e :: Int -> (Double, Double)
+%call (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_zero_Bi_e(s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun airy_zero_Bi_deriv :: Int -> Double
+%call (int s)
+%code double z;
+%     z = gsl_sf_airy_zero_Bi_deriv(s);
+%result (double z)
+
+%fun airy_zero_Bi_deriv_e :: Int -> (Double, Double)
+%call (int s)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_airy_zero_Bi_deriv_e(s, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)

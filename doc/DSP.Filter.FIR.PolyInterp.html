@@ -1,0 +1,1162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+  ><TITLE
+    >DSP.Filter.FIR.PolyInterp</TITLE
+    ><LINK HREF = "haddock.css" REL = "stylesheet" TYPE = "text/css"
+    ></HEAD
+  ><BODY
+  ><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+    ><TR
+      ><TD CLASS = "topbar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><IMG SRC = "haskell_icon.gif" WIDTH = "16" HEIGHT = "16" ALT = " "
+		></TD
+	      ><TD CLASS = "title"
+	      >Haskell DSP Library</TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "http://haskelldsp.sourceforge.net/DSP/Filter/FIR/PolyInterp.hs"
+		>Source code</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "DSP.Filter.FIR.html"
+		>Parent</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "index.html"
+		>Contents</A
+		></TD
+	      ><TD CLASS = "topbut"
+	      ><A HREF = "doc-index.html"
+		>Index</A
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "modulebar"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD
+	      ><FONT SIZE = "6"
+		>DSP.Filter.FIR.PolyInterp</FONT
+		></TD
+	      ><TD ALIGN = "right"
+	      ><TABLE CLASS = "narrow" CELLSPACING = "0" CELLPADDING = "0"
+		><TR
+		  ><TD CLASS = "infohead"
+		    >Portability</TD
+		    ><TD CLASS = "infoval"
+		    >  portable</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Stability</TD
+		    ><TD CLASS = "infoval"
+		    >  experimental</TD
+		    ></TR
+		  ><TR
+		  ><TD CLASS = "infohead"
+		    >Maintainer</TD
+		    ><TD CLASS = "infoval"
+		    >  m.p.donadio@ieee.org</TD
+		    ></TR
+		  ></TABLE
+		></TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Description</TD
+	></TR
+      ><TR
+      ><TD CLASS = "doc"
+	><P
+	  > Polynomial interpolators.  Taken from:</P
+	  ><P
+	  > Olli Niemitalo (ollinie@freenet.hut.fi), <A HREF = "Polynomial Interpolators for
+ High-Quality Resampling of Oversampled Audio.html"
+	    >Polynomial Interpolators for
+ High-Quality Resampling of Oversampled Audio</A
+	    > Search for <A HREF = "deip.pdf.html"
+	    >deip.pdf</A
+	    > with
+ Google and you will find it.
+</P
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Synopsis</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#mkcoef"
+		>mkcoef</A
+		> :: (Num a, Ix b, Integral b) =&gt; (a -&gt; a) -&gt; b -&gt; a -&gt; Array b a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#bspline_1p0o"
+		>bspline_1p0o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#bspline_2p1o"
+		>bspline_2p1o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#bspline_4p3o"
+		>bspline_4p3o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#bspline_6p5o"
+		>bspline_6p5o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#lagrange_4p3o"
+		>lagrange_4p3o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#lagrange_6p5o"
+		>lagrange_6p5o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#hermite_4p3o"
+		>hermite_4p3o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#hermite_6p3o"
+		>hermite_6p3o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#hermite_6p5o"
+		>hermite_6p5o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#sndosc_4p5o"
+		>sndosc_4p5o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#sndosc_6p5o"
+		>sndosc_6p5o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#watte_4p2o"
+		>watte_4p2o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#parabolic2x_4p2o"
+		>parabolic2x_4p2o</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_2p3o2x"
+		>optimal_2p3o2x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_2p3o4x"
+		>optimal_2p3o4x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_2p3o8x"
+		>optimal_2p3o8x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_2p3o16x"
+		>optimal_2p3o16x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_2p3o32x"
+		>optimal_2p3o32x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p2o2x"
+		>optimal_4p2o2x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p2o4x"
+		>optimal_4p2o4x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p2o8x"
+		>optimal_4p2o8x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p2o16x"
+		>optimal_4p2o16x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p2o32x"
+		>optimal_4p2o32x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p3o2x"
+		>optimal_4p3o2x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p3o4x"
+		>optimal_4p3o4x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p3o8x"
+		>optimal_4p3o8x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p3o16x"
+		>optimal_4p3o16x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p3o32x"
+		>optimal_4p3o32x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p4o2x"
+		>optimal_4p4o2x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p4o4x"
+		>optimal_4p4o4x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p4o8x"
+		>optimal_4p4o8x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p4o16x"
+		>optimal_4p4o16x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_4p4o32x"
+		>optimal_4p4o32x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p4o2x"
+		>optimal_6p4o2x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p4o4x"
+		>optimal_6p4o4x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p4o8x"
+		>optimal_6p4o8x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p4o16x"
+		>optimal_6p4o16x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p4o32x"
+		>optimal_6p4o32x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p5o2x"
+		>optimal_6p5o2x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p5o4x"
+		>optimal_6p5o4x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p5o8x"
+		>optimal_6p5o8x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p5o16x"
+		>optimal_6p5o16x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "s8"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      ><A HREF = "#optimal_6p5o32x"
+		>optimal_6p5o32x</A
+		> :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "section1"
+	>Documentation</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "mkcoef"
+	  ></A
+	  ><B
+	  >mkcoef</B
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "body"
+	><TABLE CLASS = "vanilla" CELLSPACING = "0" CELLPADDING = "0"
+	  ><TR
+	    ><TD CLASS = "decl"
+	      >:: (Num a, Ix b, Integral b)</TD
+	      ><TD CLASS = "rdoc"
+	      ></TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >=&gt; (a -&gt; a)</TD
+	      ><TD CLASS = "rdoc"
+	      > f</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; b</TD
+	      ><TD CLASS = "rdoc"
+	      > p</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; a</TD
+	      ><TD CLASS = "rdoc"
+	      > x</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "decl"
+	      >-&gt; Array b a</TD
+	      ><TD CLASS = "rdoc"
+	      > h[n]</TD
+	      ></TR
+	    ><TR
+	    ><TD CLASS = "ndoc" COLSPAN = "2"
+	      > <TT
+		><A HREF = "DSP.Filter.FIR.PolyInterp.html#mkcoef"
+		  >mkcoef</A
+		  ></TT
+		> takes the continuous impluse response function (one of the
+ functions below, <TT
+		>f</TT
+		>) and number of points in the interpolation, <TT
+		>p</TT
+		>, time
+ shifts it by <TT
+		>x</TT
+		>, samples it, and creates an array with the interpolation
+ coeficients that can be used as a FIR filter.</TD
+	      ></TR
+	    ></TABLE
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "bspline_1p0o"
+	  ></A
+	  ><B
+	  >bspline_1p0o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "bspline_2p1o"
+	  ></A
+	  ><B
+	  >bspline_2p1o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "bspline_4p3o"
+	  ></A
+	  ><B
+	  >bspline_4p3o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "bspline_6p5o"
+	  ></A
+	  ><B
+	  >bspline_6p5o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "lagrange_4p3o"
+	  ></A
+	  ><B
+	  >lagrange_4p3o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "lagrange_6p5o"
+	  ></A
+	  ><B
+	  >lagrange_6p5o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "hermite_4p3o"
+	  ></A
+	  ><B
+	  >hermite_4p3o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "hermite_6p3o"
+	  ></A
+	  ><B
+	  >hermite_6p3o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "hermite_6p5o"
+	  ></A
+	  ><B
+	  >hermite_6p5o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "sndosc_4p5o"
+	  ></A
+	  ><B
+	  >sndosc_4p5o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "sndosc_6p5o"
+	  ></A
+	  ><B
+	  >sndosc_6p5o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "watte_4p2o"
+	  ></A
+	  ><B
+	  >watte_4p2o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "parabolic2x_4p2o"
+	  ></A
+	  ><B
+	  >parabolic2x_4p2o</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_2p3o2x"
+	  ></A
+	  ><B
+	  >optimal_2p3o2x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_2p3o4x"
+	  ></A
+	  ><B
+	  >optimal_2p3o4x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_2p3o8x"
+	  ></A
+	  ><B
+	  >optimal_2p3o8x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_2p3o16x"
+	  ></A
+	  ><B
+	  >optimal_2p3o16x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_2p3o32x"
+	  ></A
+	  ><B
+	  >optimal_2p3o32x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p2o2x"
+	  ></A
+	  ><B
+	  >optimal_4p2o2x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p2o4x"
+	  ></A
+	  ><B
+	  >optimal_4p2o4x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p2o8x"
+	  ></A
+	  ><B
+	  >optimal_4p2o8x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p2o16x"
+	  ></A
+	  ><B
+	  >optimal_4p2o16x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p2o32x"
+	  ></A
+	  ><B
+	  >optimal_4p2o32x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p3o2x"
+	  ></A
+	  ><B
+	  >optimal_4p3o2x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p3o4x"
+	  ></A
+	  ><B
+	  >optimal_4p3o4x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p3o8x"
+	  ></A
+	  ><B
+	  >optimal_4p3o8x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p3o16x"
+	  ></A
+	  ><B
+	  >optimal_4p3o16x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p3o32x"
+	  ></A
+	  ><B
+	  >optimal_4p3o32x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p4o2x"
+	  ></A
+	  ><B
+	  >optimal_4p4o2x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p4o4x"
+	  ></A
+	  ><B
+	  >optimal_4p4o4x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p4o8x"
+	  ></A
+	  ><B
+	  >optimal_4p4o8x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p4o16x"
+	  ></A
+	  ><B
+	  >optimal_4p4o16x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_4p4o32x"
+	  ></A
+	  ><B
+	  >optimal_4p4o32x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p4o2x"
+	  ></A
+	  ><B
+	  >optimal_6p4o2x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p4o4x"
+	  ></A
+	  ><B
+	  >optimal_6p4o4x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p4o8x"
+	  ></A
+	  ><B
+	  >optimal_6p4o8x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p4o16x"
+	  ></A
+	  ><B
+	  >optimal_6p4o16x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p4o32x"
+	  ></A
+	  ><B
+	  >optimal_6p4o32x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p5o2x"
+	  ></A
+	  ><B
+	  >optimal_6p5o2x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p5o4x"
+	  ></A
+	  ><B
+	  >optimal_6p5o4x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p5o8x"
+	  ></A
+	  ><B
+	  >optimal_6p5o8x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p5o16x"
+	  ></A
+	  ><B
+	  >optimal_6p5o16x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "decl"
+	><A NAME = "optimal_6p5o32x"
+	  ></A
+	  ><B
+	  >optimal_6p5o32x</B
+	  > :: (Ord a, Fractional a) =&gt; a -&gt; a</TD
+	></TR
+      ><TR
+      ><TD CLASS = "s15"
+	></TD
+	></TR
+      ><TR
+      ><TD CLASS = "botbar"
+	>Produced by <A HREF = "http://www.haskell.org/haddock"
+	  >Haddock</A
+	  > version 0.4</TD
+	></TR
+      ></TABLE
+    ></BODY
+  ></HTML
+>

@@ -1,0 +1,234 @@
+{-# OPTIONS -fffi -fvia-C #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Numeric.Special.Ellint
+-- Copyright   :  (c) Matthew Donadio 2003
+-- License     :  GPL
+--
+-- Maintainer  :  m.p.donadio@ieee.org
+-- Stability   :  experimental
+-- Portability :  portable
+--
+-- FFI to GSL for the Ellint functions
+--
+-----------------------------------------------------------------------------
+
+module Numeric.Special.Ellint (ellint_Kcomp, ellint_Kcomp_e,
+			       ellint_Ecomp, ellint_Ecomp_e,
+			       ellint_F,     ellint_F_e,
+			       ellint_E,     ellint_E_e,
+			       ellint_P,     ellint_P_e,
+			       ellint_D,     ellint_D_e,
+			       ellint_RC,    ellint_RC_e,
+			       ellint_RD,    ellint_RD_e,
+			       ellint_RF,    ellint_RF_e,
+			       ellint_RJ,    ellint_RJ_e
+			      ) where
+
+import StdDIS
+
+import Foreign
+
+%#include <gsl/gsl_errno.h>
+%#include <gsl/gsl_sf_ellint.h>
+
+-------------------------------------------------------------------------------
+
+%fun ellint_Kcomp :: Double -> Double
+%call (double x)
+%code double y;
+%     y = gsl_sf_ellint_Kcomp(x, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun ellint_Kcomp_e :: Double -> (Double, Double)
+%call (double x)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_Kcomp_e(x, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_Ecomp :: Double -> Double
+%call (double k)
+%code double y;
+%     y = gsl_sf_ellint_Ecomp(k, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun ellint_Ecomp_e :: Double -> (Double, Double)
+%call (double k)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_Ecomp_e(k, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_F :: Double -> Double -> Double
+%call (double phi) (double k)
+%code double y;
+%     y = gsl_sf_ellint_F(phi, k, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun ellint_F_e :: Double -> Double -> (Double, Double)
+%call (double phi) (double k)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_F_e(phi, k, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_E :: Double -> Double -> Double
+%call (double phi) (double k)
+%code double y;
+%     y = gsl_sf_ellint_E(phi, k, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun ellint_E_e :: Double -> Double -> (Double, Double)
+%call (double phi) (double k)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_E_e(phi, k, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_P :: Double -> Double -> Double -> Double
+%call (double phi) (double k) (double n)
+%code double y;
+%     y = gsl_sf_ellint_P(phi, k, n, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun ellint_P_e :: Double -> Double -> Double -> (Double, Double)
+%call (double phi) (double k) (double n)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_P_e(phi, k, n, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_D :: Double -> Double -> Double -> Double
+%call (double phi) (double k) (double n)
+%code double y;
+%     y = gsl_sf_ellint_D(phi, k, n, GSL_PREC_DOUBLE);
+%result (double y)
+
+%fun ellint_D_e :: Double -> Double -> Double -> (Double, Double)
+%call (double phi) (double k) (double n)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_D_e(phi, k, n, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_RC :: Double -> Double -> Double
+%call (double x) (double y)
+%code double it;
+%     it = gsl_sf_ellint_RC(x, y, GSL_PREC_DOUBLE);
+%result (double it)
+
+%fun ellint_RC_e :: Double -> Double -> (Double, Double)
+%call (double x) (double y)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_RC_e(x, y, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_RD :: Double -> Double -> Double -> Double
+%call (double x) (double y) (double z)
+%code double it;
+%     it = gsl_sf_ellint_RD(x, y, z, GSL_PREC_DOUBLE);
+%result (double it)
+
+%fun ellint_RD_e :: Double -> Double -> Double -> (Double, Double)
+%call (double x) (double y) (double z)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_RD_e(x, y, z, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_RF :: Double -> Double -> Double -> Double
+%call (double x) (double y) (double z)
+%code double it;
+%     it = gsl_sf_ellint_RF(x, y, z, GSL_PREC_DOUBLE);
+%result (double it)
+
+%fun ellint_RF_e :: Double -> Double -> Double -> (Double, Double)
+%call (double x) (double y) (double z)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_RF_e(x, y, z, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
+
+-------------------------------------------------------------------------------
+
+%fun ellint_RJ :: Double -> Double -> Double -> Double -> Double
+%call (double x) (double y) (double z) (double p)
+%code double it;
+%     it = gsl_sf_ellint_RJ(x, y, z, p, GSL_PREC_DOUBLE);
+%result (double it)
+
+%fun ellint_RJ_e :: Double -> Double -> Double -> Double -> (Double, Double)
+%call (double x) (double y) (double z) (double p)
+%code int status;
+%     double val;
+%     double err;
+%     gsl_sf_result result;
+%     status = gsl_sf_ellint_RJ_e(x, y, z, p, GSL_PREC_DOUBLE, &result);
+%     val = result.val;
+%     err = result.err;
+%fail {status != 0} {gsl_strerror(status)}
+%result (double val, double err)
